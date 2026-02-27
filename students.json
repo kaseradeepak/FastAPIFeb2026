@@ -1,0 +1,32 @@
+{
+    "ST001" : {
+        "name" : "Abhishek",
+        "city" : "Bangalore",
+        "age" : 21,
+        "problems_sovled" : 81
+    },
+    "ST002" : {
+        "name" : "Nisarg",
+        "city" : "Hyderabad",
+        "age" : 20,
+        "problems_sovled" : 67
+    },
+    "ST003" : {
+        "name" : "Mukul",
+        "city" : "Delhi",
+        "age" : 23,
+        "problems_sovled" : 78
+    },
+    "ST004" : {
+        "name" : "Ranjan",
+        "city" : "Mumbai",
+        "age" : 26,
+        "problems_sovled" : 92
+    },
+    "ST005" : {
+        "name" : "Piyush",
+        "city" : "Kolkata",
+        "age" : 28,
+        "problems_sovled" : 105
+    }
+}
