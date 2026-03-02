@@ -85,3 +85,22 @@ def get_students_in_sorted_order(sort_by: str = Query(..., description="Sort stu
 @app.get("/api")
 def sample_api(x = Depends(db_operations)):
     return x
+
+# SQLAlchemy - ORM library in Python to deal with DB.
+# ORM - Object Relation Mapping
+
+# Object => Models / Classes
+# Relations => Tables
+
+# FastAPI - Build APIs
+# FastAPI + SQLAlchemy
+
+# SQLAlchemy => Core or ORM
+
+# class Student:
+#     id: int
+#     name: str
+#     age: int
+#     email: str
+#     phone
+#     address
