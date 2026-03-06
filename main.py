@@ -1,10 +1,17 @@
 # pip3 install fastapi pydantic uvicorn
 # uvicorn main:app --reload
-from fastapi import FastAPI, HTTPException, Path, Query, Depends
+from fastapi import FastAPI, HTTPException, Path, Query, Depends, Request
+from fastapi.responses import JSONResponse
 from commons import db_operations
 import json
 
 app = FastAPI()
+
+# Custom Exception
+class StudentNotFoundException(Exception):
+    def __init__(self, student_id: str):
+        self.student_id = student_id
+
 
 # localhost:8000/hello
 @app.get("/hello")
@@ -30,6 +37,16 @@ def get_all_students():
     # return alll the students from students.json file.
     return load_students_data()
 
+@app.exception_handler(StudentNotFoundException)
+async def handle_student_not_found_exception(request: Request, exc: StudentNotFoundException):
+    return JSONResponse(
+        status_code=404,
+        content={
+            "request path" : request.base_url.hostname,
+            "message" : f"Student id: {exc.student_id} is invalid, Please try with a valid student id."
+        }
+    )
+
 # /students/ST001
 # Path Params  => passed via curly braces.
 # Three dots inside Path function => Mandatory param.
@@ -38,9 +55,12 @@ def get_student_with_id(student_id: str = Path(..., description="Id of the stude
     data = load_students_data()
 
     # Error Handling.
+    # if student_id not in data:
+    #     # status_code = 404 -> Not found
+    #     raise HTTPException(status_code=404, detail=f"Invalid student id: {student_id} provided.")
+
     if student_id not in data:
-        # status_code = 404 -> Not found
-        raise HTTPException(status_code=404, detail=f"Invalid student id: {student_id} provided.")
+        raise StudentNotFoundException(student_id=student_id)
     
     return data[student_id]
 
