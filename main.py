@@ -37,8 +37,10 @@ def get_all_students():
 def get_student_with_id(student_id: str = Path(..., description="Id of the student which you want to access.", example="ST007")):
     data = load_students_data()
 
+    # Error Handling.
     if student_id not in data:
-        raise HTTPException(status_code=404, detail="Student not found.")
+        # status_code = 404 -> Not found
+        raise HTTPException(status_code=404, detail=f"Invalid student id: {student_id} provided.")
     
     return data[student_id]
 
@@ -104,3 +106,18 @@ def sample_api(x = Depends(db_operations)):
 #     email: str
 #     phone
 #     address
+
+# Status Codes
+# 404 - Resource not found.
+# 401 - Unauthorized 
+# 429 - Too many requests (Rate Limiting)
+# 500 - Internal Server
+# 502 - Bad Gateway
+# 200 - OK
+
+#amazon.in/microsoft => 404
+
+# 2XX - Success
+# 3XX - Redirect
+# 4XX - Client Side errors
+# 5XX - Server Side errors
