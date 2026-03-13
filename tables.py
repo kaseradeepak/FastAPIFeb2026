@@ -8,7 +8,7 @@ metadata = MetaData() # metadata object stores the schema/structure of the table
 users = Table(
     "users", # name of the table.
     metadata,
-    Column("id", Integer, primary_key=True), #primary_key -> it makes nullable=False & auto-increment
+    Column("id", Integer, primary_key=True), #primary_key -> it makes nullable=False, unique=True &auto-increment
     Column("name", String(50), nullable=False), # name can have max 50 characters.
     Column("email", String, unique=True, nullable=False)
 )
