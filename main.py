@@ -12,6 +12,8 @@ class StudentNotFoundException(Exception):
     def __init__(self, student_id: str):
         self.student_id = student_id
 
+# HTTP Methods - GET / POST / PUT / DELETE
+# CRUD
 
 # localhost:8000/hello
 @app.get("/hello")
@@ -25,9 +27,11 @@ def say_bye():
 
 def load_students_data():
     # Load students data from students.json file.
+    # Open students.json file in the read format.
     with open('students.json', 'r') as f:
         students_data = json.load(f)
 
+    # dictionary
     return students_data
 
 # Get all the students.
@@ -63,6 +67,11 @@ def get_student_with_id(student_id: str = Path(..., description="Id of the stude
         raise StudentNotFoundException(student_id=student_id)
     
     return data[student_id]
+
+# localhost:8000/students/ST001 => Path Param
+
+# localhost:8000/students?a=10 => Query Param
+# localhost:8000/students?id=123&age=20
 
 # Query Param : Key-Value param
 # /students?student_id=ST001

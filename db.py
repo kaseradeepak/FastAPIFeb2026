@@ -8,7 +8,7 @@ engine = create_engine(DATABASE_URL, echo=True)
 
 # ORM - Object Relational Mapping
 # class Student:
-#     id: int
+#     id:int
 #     name: str
 #     age: int
 #     batch: str
